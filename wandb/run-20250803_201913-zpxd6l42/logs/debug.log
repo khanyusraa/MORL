@@ -41,3 +41,4 @@ config: {'env_id': 'minecart-v0', 'learning_rate': 0.001, 'initial_epsilon': 1.0
 2025-08-03 20:19:15,959 INFO    MainThread:15088 [wandb_run.py:_config_callback():1363] config_cb num_eval_weights_for_eval 50 None
 2025-08-03 20:19:15,959 INFO    MainThread:15088 [wandb_config.py:__setitem__():154] [no run ID] config set reset_learning_starts = False - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x000002302E70CB90>>
 2025-08-03 20:19:15,959 INFO    MainThread:15088 [wandb_run.py:_config_callback():1363] config_cb reset_learning_starts False None
+2025-08-03 20:32:30,965 INFO    MsgRouterThr:15088 [mailbox.py:close():129] [no run ID] Closing mailbox, abandoning 2 handles.

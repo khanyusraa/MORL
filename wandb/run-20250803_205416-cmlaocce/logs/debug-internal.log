@@ -1,0 +1,12 @@
+{"time":"2025-08-03T20:54:16.8922652+02:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-08-03T20:54:17.3161876+02:00","level":"INFO","msg":"stream: created new stream","id":"cmlaocce"}
+{"time":"2025-08-03T20:54:17.3167047+02:00","level":"INFO","msg":"stream: started","id":"cmlaocce"}
+{"time":"2025-08-03T20:54:17.3167047+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"cmlaocce"}
+{"time":"2025-08-03T20:54:17.3167047+02:00","level":"INFO","msg":"sender: started","stream_id":"cmlaocce"}
+{"time":"2025-08-03T20:54:17.3167047+02:00","level":"INFO","msg":"handler: started","stream_id":"cmlaocce"}
+{"time":"2025-08-03T21:46:38.0098406+02:00","level":"INFO","msg":"stream: closing","id":"cmlaocce"}
+{"time":"2025-08-03T21:46:39.8438996+02:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-08-03T21:46:40.2081318+02:00","level":"INFO","msg":"handler: closed","stream_id":"cmlaocce"}
+{"time":"2025-08-03T21:46:40.2081318+02:00","level":"INFO","msg":"sender: closed","stream_id":"cmlaocce"}
+{"time":"2025-08-03T21:46:40.2081318+02:00","level":"INFO","msg":"writer: Close: closed","stream_id":"cmlaocce"}
+{"time":"2025-08-03T21:46:40.2086361+02:00","level":"INFO","msg":"stream: closed","id":"cmlaocce"}

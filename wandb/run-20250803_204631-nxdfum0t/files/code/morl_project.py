@@ -25,40 +25,42 @@ agent = Envelope(
     batch_size=128,
     gamma=GAMMA,
     seed=42,
+    
+    # 🔧 Essential learning params
     learning_rate=1e-3,
     initial_epsilon=1.0,
     final_epsilon=0.05,
-    epsilon_decay_steps=25000,
-    learning_starts=1000,
+    epsilon_decay_steps=2000,
+    learning_starts=100,
     gradient_updates=1,
     tau=0.005,
     target_net_update_freq=500,
-    buffer_size=100000,
+    buffer_size=100_000,
+    
+    # ✅ Enable envelope-specific functionality
     envelope=True,
-    num_sample_w=8,
+    num_sample_w=8,  # try 8 or 16
+
+    # Optional: prioritized replay
     per=True,
     per_alpha=0.6,
+
+    # Optional: homotopy (weight tradeoff blending)
     initial_homotopy_lambda=1.0,
     final_homotopy_lambda=0.1,
-    homotopy_decay_steps=40000
+    homotopy_decay_steps=500
 )
 
-# Train the agent
 agent.train(
-    total_timesteps=200000,
+    total_timesteps=10000,
     eval_env=eval_env,
-    eval_freq=10000,
-    ref_point=np.array([0.0, 0.0, -100.0])
+    eval_freq=5000,
+    ref_point=np.array([0.0, 0.0, -1.0])
 )
 
-# Unwrap the RecordVideo wrapper
-stats_env = env.env  # env is RecordVideo → stats_env is MORecordEpisodeStatistics
-
-# Loop through logged episode stats
+stats_env = env.env  
 returns = list(stats_env.return_queue)
-lengths = list(stats_env.length_queue)
 
-print("\n--- Episode Details ---")
-for i, (ret, length) in enumerate(zip(returns, lengths)):
-    ore1, ore2, fuel_cost = ret
-    print(f"Episode {i + 1}: Steps = {length}, Ore1 = {ore1:.2f}, Ore2 = {ore2:.2f}, Fuel Cost = {fuel_cost:.2f}")
+print("\n--- Episode Reward Summary ---")
+for idx, ret in enumerate(returns):
+    print(f"Episode {idx + 1}: Reward Vector = {ret}")
