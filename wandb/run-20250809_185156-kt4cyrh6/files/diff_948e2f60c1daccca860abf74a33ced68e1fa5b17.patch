@@ -1,0 +1,100 @@
+diff --git a/morl_project.py b/morl_project.py
+index 5a2472c..abc8788 100644
+--- a/morl_project.py
++++ b/morl_project.py
+@@ -19,19 +19,19 @@ eval_env = MORecordEpisodeStatistics(eval_env, gamma=GAMMA)
+ 
+ env.reset(seed=42)
+ 
++'''
+ agent = Envelope(
+     env=env,
+-    net_arch=[256, 256], #neural network layers
+-    batch_size=128, 
++    batch_size=32, 
+     gamma=GAMMA, #discount factor, lower will increase learning but bad for long-term
+     seed=42, 
+-    #learning_rate=1e-3, 
++    learning_rate=0.0003, 
+     initial_epsilon=1.0, #fully random at first
+-    final_epsilon=0.05, #minimal exploration probability
++    final_epsilon=0.2, #minimal exploration probability
+     epsilon_decay_steps=25000, #decays over these steps, higher is more prolonged
+     learning_starts=1000, #higher prevents learning from biased data
+     gradient_updates=1, #lower needs more environment steps for convergence
+-    tau=0.005, #higher updates target network faster but can be potentially unstable
++    tau=1.0, #higher updates target network faster but can be potentially unstable
+     buffer_size=100000, #larger = better generalisation
+     envelope=True, 
+     num_sample_w=8, #higher is better approximation of Pareto Front, try 16 too
+@@ -40,7 +40,29 @@ agent = Envelope(
+     initial_homotopy_lambda=1.0, #behaves like linear q-learning
+     final_homotopy_lambda=0.1, #behaves like envelope q-learning
+     homotopy_decay_steps=40000 
+-)
++)'''
++
++agent = Envelope(
++    env=env, 
++    learning_rate= 0.0003, 
++    initial_epsilon= 0.2, 
++    epsilon_decay_steps= 10000, 
++    batch_size= 32, 
++    tau= 1.0, 
++    #clip_grand_norm= 1.0, 
++    target_net_update_freq= 1000, 
++    gamma= GAMMA, 
++    #use_envelope= True, 
++    num_sample_w= 8, 
++    net_arch= [512, 512], 
++    per= True, 
++    gradient_updates= 1, 
++    buffer_size= 100000, 
++    initial_homotopy_lambda= 0.95, 
++    final_homotopy_lambda= 1.0, 
++    homotopy_decay_steps= None, 
++    learning_starts= 100, 
++    seed= 318)
+ 
+ # Train the agent
+ agent.train(
+@@ -50,10 +72,8 @@ agent.train(
+     ref_point=np.array([0.0, 0.0, -100.0]) #worst possible reward returns
+ )
+ 
+-# Unwrap the RecordVideo wrapper
+-stats_env = env.env  # env is RecordVideo → stats_env is MORecordEpisodeStatistics
++stats_env = env.env # Unwrap the RecordVideo wrapper
+ 
+-# Loop through logged episode stats
+ returns = list(stats_env.return_queue)
+ lengths = list(stats_env.length_queue)
+ 
+diff --git a/videos/minecart_test/rl-video-episode-0.mp4 b/videos/minecart_test/rl-video-episode-0.mp4
+deleted file mode 100644
+index 3ece588..0000000
+Binary files a/videos/minecart_test/rl-video-episode-0.mp4 and /dev/null differ
+diff --git a/videos/minecart_test/rl-video-episode-100.mp4 b/videos/minecart_test/rl-video-episode-100.mp4
+deleted file mode 100644
+index 7876abc..0000000
+Binary files a/videos/minecart_test/rl-video-episode-100.mp4 and /dev/null differ
+diff --git a/videos/minecart_test/rl-video-episode-150.mp4 b/videos/minecart_test/rl-video-episode-150.mp4
+deleted file mode 100644
+index b6a3f47..0000000
+Binary files a/videos/minecart_test/rl-video-episode-150.mp4 and /dev/null differ
+diff --git a/videos/minecart_test/rl-video-episode-200.mp4 b/videos/minecart_test/rl-video-episode-200.mp4
+deleted file mode 100644
+index 302f5ce..0000000
+Binary files a/videos/minecart_test/rl-video-episode-200.mp4 and /dev/null differ
+diff --git a/videos/minecart_test/rl-video-episode-250.mp4 b/videos/minecart_test/rl-video-episode-250.mp4
+deleted file mode 100644
+index b1b123f..0000000
+Binary files a/videos/minecart_test/rl-video-episode-250.mp4 and /dev/null differ
+diff --git a/videos/minecart_test/rl-video-episode-300.mp4 b/videos/minecart_test/rl-video-episode-300.mp4
+deleted file mode 100644
+index edf4a82..0000000
+Binary files a/videos/minecart_test/rl-video-episode-300.mp4 and /dev/null differ
+diff --git a/videos/minecart_test/rl-video-episode-50.mp4 b/videos/minecart_test/rl-video-episode-50.mp4
+deleted file mode 100644
+index ded7bea..0000000
+Binary files a/videos/minecart_test/rl-video-episode-50.mp4 and /dev/null differ
