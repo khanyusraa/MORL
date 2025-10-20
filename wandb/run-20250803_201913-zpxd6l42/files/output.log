@@ -1,7 +1,0 @@
-
---- Episode Reward Summary ---
-Traceback (most recent call last):
-  File "c:\Users\USER-PC\MORL\morl_project.py", line 63, in <module>
-    for idx, ret in enumerate(env.episode_returns):
-                              ^^^^^^^^^^^^^^^^^^^
-AttributeError: 'RecordVideo' object has no attribute 'episode_returns'

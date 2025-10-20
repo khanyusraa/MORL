@@ -1,7 +1,0 @@
-Traceback (most recent call last):
-  File "c:\Users\USER-PC\MORL\morl_project.py", line 42, in <module>
-    agent.train(
-  File "C:\Users\USER-PC\MORL\.venv\Lib\site-packages\morl_baselines\multi_policy\envelope\envelope.py", line 508, in train
-    assert ref_point is not None, "Reference point must be provided for the hypervolume computation."
-           ^^^^^^^^^^^^^^^^^^^^^
-AssertionError: Reference point must be provided for the hypervolume computation.
